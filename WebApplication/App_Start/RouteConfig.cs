@@ -14,9 +14,21 @@ namespace WebApplication
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "detailformation",
+                url: "formation/{nomSeo}",
+                defaults: new { controller = "Formation", action = "DetailsFormation"}
+            );
+
+            routes.MapRoute(
+                name: "touteslesformations",
+                url: "toutes-les-formations",
+                defaults: new { controller = "Formation", action = "ToutesLesFormations"}
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Accueil", id = UrlParameter.Optional }
             );
         }
     }

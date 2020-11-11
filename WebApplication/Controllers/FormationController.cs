@@ -21,7 +21,7 @@ namespace WebApplication.Controllers
             return View(listFormations);
         }
 
-        public ActionResult DetailFormation(string nomSeo)
+        public ActionResult DetailsFormation(string nomSeo)
         {
             var vm = new FormationAvisViewModel();
             using (var context = new WebApEntities())
@@ -35,11 +35,13 @@ namespace WebApplication.Controllers
                 vm.FormationDescription = formationEntity.Description;
                 vm.FormationNomSeo = nomSeo;
                 vm.FormationUrl = formationEntity.Url;
-                vm.Note = formationEntity.Avis;
+                vm.Note = formationEntity.Avis.Average(a => a.Note);
+                vm.NombreAvis = formationEntity.Avis.Count;
+                vm.Avis = formationEntity.Avis.ToList();
 
             }
 
-            return View();
+            return View(vm);
         }
     }
 }
